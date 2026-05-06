@@ -1,0 +1,4 @@
+service_name,reason
+auth-service,高慢请求率
+payment-service,重复 Timeout 错误
+search-service,高服务器错误率

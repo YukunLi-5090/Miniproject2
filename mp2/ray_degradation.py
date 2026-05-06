@@ -10,7 +10,7 @@ from .dataset import chunked, iter_records, LogRecord
 
 @dataclass(frozen=True)
 class Thresholds:
-    slow_ms: int = 1000
+    slow_ms: int = 800
     slow_rate: float = 0.20
     server_error_rate: float = 0.10
     timeout_count: int = 5
@@ -48,7 +48,7 @@ def run_ray_degradation(
         for r in rows:
             c = out.setdefault(r.service_name, [0, 0, 0, 0])
             c[0] += 1
-            if r.response_time_ms >= slow_ms:
+            if r.response_time_ms > slow_ms:
                 c[1] += 1
             if r.status_code >= 500:
                 c[2] += 1
@@ -114,6 +114,13 @@ def run_ray_degradation(
         rows=degraded_rows,
     )
 
+    degraded_min_csv = outdir_p / "degraded_service_detection.csv"
+    write_csv(
+        degraded_min_csv,
+        headers=["service_name", "reason"],
+        rows=((r[0], r[7]) for r in degraded_rows),
+    )
+
     summary = runtime_metadata(
         {
             "input": input_path_or_s3,
@@ -136,4 +143,8 @@ def run_ray_degradation(
     except Exception:
         pass
 
-    return {"degraded_services": degraded_csv, "degradation_summary": summary_json}
+    return {
+        "degraded_service_detection": degraded_min_csv,
+        "degraded_services": degraded_csv,
+        "degradation_summary": summary_json,
+    }

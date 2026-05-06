@@ -28,7 +28,7 @@ def main(argv: list[str] | None = None) -> int:
     p_ray = sub.add_parser("ray", help="Ray 并行降级检测")
     _add_common_io(p_ray)
     p_ray.add_argument("--chunk-size", type=int, default=5000, help="分块大小（默认 5000 行）")
-    p_ray.add_argument("--slow-ms", type=int, default=1000, help="慢请求阈值 ms（默认 1000）")
+    p_ray.add_argument("--slow-ms", type=int, default=800, help="慢请求阈值 ms（默认 800）")
     p_ray.add_argument("--slow-rate", type=float, default=0.20, help="慢请求比例阈值（默认 0.20）")
     p_ray.add_argument("--server-error-rate", type=float, default=0.10, help="服务器错误率阈值（默认 0.10）")
     p_ray.add_argument("--timeout-count", type=int, default=5, help="Timeout 次数阈值（默认 5）")

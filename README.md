@@ -56,5 +56,6 @@ MapReduce（outputs/ 下）：
 
 Ray（outputs/ 下）：
 
+- degraded_service_detection.csv
 - degraded_services.csv
 - degradation_summary.json
