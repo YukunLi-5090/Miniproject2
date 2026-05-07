@@ -1,4 +1,6 @@
 service_name,request_count
-auth-service,5
-payment-service,5
-search-service,2
+auth-service,12121
+order-service,10937
+search-service,10616
+notification-service,8412
+payment-service,7914

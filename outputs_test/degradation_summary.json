@@ -1,16 +1,16 @@
 {
-  "generated_at_utc": "2026-05-06T14:21:48.400193+00:00",
+  "generated_at_utc": "2026-05-07T11:51:34.690891+00:00",
   "python": "3.12.10",
   "platform": "Windows-11-10.0.26200-SP0",
   "cwd": "C:\\Users\\33607\\Desktop\\Miniproject2_from_github",
-  "input": "data/sample_dataset.csv",
-  "rows": 12,
+  "input": "data/Comp3041J MiniProject 2 Dataset.csv",
+  "rows": 50000,
   "thresholds": {
     "slow_ms": 800,
     "slow_rate_gt": 0.2,
     "server_error_rate_gt": 0.1,
     "timeout_count_gte": 5
   },
-  "services_total": 3,
-  "services_degraded": 3
+  "services_total": 5,
+  "services_degraded": 5
 }

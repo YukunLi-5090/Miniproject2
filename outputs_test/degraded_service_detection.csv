@@ -1,4 +1,6 @@
 service_name,reason
-auth-service,高慢请求率
-payment-service,重复 Timeout 错误
-search-service,高服务器错误率
+auth-service,repeated timeout errors
+notification-service,repeated timeout errors
+order-service,repeated timeout errors
+payment-service,high slow request rate | high server error rate | repeated timeout errors
+search-service,high slow request rate | repeated timeout errors

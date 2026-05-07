@@ -1,2 +1,6 @@
 service_name,server_error_count
-search-service,1
+payment-service,1362
+search-service,904
+order-service,717
+auth-service,436
+notification-service,436

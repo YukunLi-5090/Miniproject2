@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from io import BytesIO, TextIOWrapper
+from pathlib import Path
 from typing import BinaryIO, TextIO
 
 
@@ -50,3 +51,19 @@ def download_to_memory(uri: str) -> BytesIO:
     obj = s3.get_object(Bucket=p.bucket, Key=p.key)
     b = obj["Body"].read()
     return BytesIO(b)
+
+
+def download_file(uri: str, local_path: str | Path) -> Path:
+    import boto3
+
+    p = S3Path.parse(uri)
+    dst = Path(local_path)
+    dst.parent.mkdir(parents=True, exist_ok=True)
+
+    s3 = boto3.client("s3")
+    obj = s3.get_object(Bucket=p.bucket, Key=p.key)
+    body: BinaryIO = obj["Body"]
+    with dst.open("wb") as f:
+        for chunk in iter(lambda: body.read(1024 * 1024), b""):
+            f.write(chunk)
+    return dst

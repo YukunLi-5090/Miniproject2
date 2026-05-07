@@ -1,4 +1,6 @@
 service_name,total_requests,slow_requests,slow_rate,server_errors,server_error_rate,timeout_errors,reasons
-auth-service,5,4,0.8,0,0.0,0,高慢请求率
-payment-service,5,0,0.0,0,0.0,5,重复 Timeout 错误
-search-service,2,0,0.0,1,0.5,0,高服务器错误率
+auth-service,12121,545,0.044963,436,0.035971,199,repeated timeout errors
+notification-service,8412,566,0.067285,436,0.051831,164,repeated timeout errors
+order-service,10937,1151,0.105239,717,0.065557,308,repeated timeout errors
+payment-service,7914,2134,0.269649,1362,0.1721,664,high slow request rate | high server error rate | repeated timeout errors
+search-service,10616,4581,0.431518,904,0.085154,446,high slow request rate | repeated timeout errors

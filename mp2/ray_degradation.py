@@ -77,11 +77,11 @@ def run_ray_degradation(
 
         reasons: list[str] = []
         if slow_rate > t.slow_rate:
-            reasons.append("高慢请求率")
+            reasons.append("high slow request rate")
         if server_err_rate > t.server_error_rate:
-            reasons.append("高服务器错误率")
+            reasons.append("high server error rate")
         if timeout_err >= t.timeout_count:
-            reasons.append("重复 Timeout 错误")
+            reasons.append("repeated timeout errors")
 
         if reasons:
             degraded_count += 1
