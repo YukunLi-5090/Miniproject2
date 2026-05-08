@@ -3,6 +3,7 @@ from __future__ import annotations
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 
 from .common import ensure_dir, runtime_metadata, write_csv, write_json
 from .dataset import chunked, iter_records, LogRecord
@@ -35,6 +36,7 @@ def run_ray_degradation(
     thresholds: Thresholds | None = None,
     ray_address: str | None = None,
 ) -> dict[str, Path]:
+    started = perf_counter()
     import ray
 
     t = thresholds or Thresholds()
@@ -131,6 +133,8 @@ def run_ray_degradation(
                 "server_error_rate_gt": t.server_error_rate,
                 "timeout_count_gte": t.timeout_count,
             },
+            "runtime_seconds": round(perf_counter() - started, 6),
+            "execution_environment": "Ray local instance" if ray_address is None else f"Ray cluster: {ray_address}",
             "services_total": len(combined),
             "services_degraded": degraded_count,
         }
