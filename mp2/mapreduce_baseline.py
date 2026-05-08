@@ -3,12 +3,14 @@ from __future__ import annotations
 from collections import defaultdict
 from dataclasses import dataclass
 from pathlib import Path
+from time import perf_counter
 
 from .common import ensure_dir, runtime_metadata, write_csv, write_json
 from .dataset import iter_records
 
 
 def run_mapreduce_baseline(input_path_or_s3: str, outdir: str | Path) -> dict[str, Path]:
+    started = perf_counter()
     outdir_p = ensure_dir(outdir)
 
     requests_by_service: dict[str, int] = defaultdict(int)
@@ -60,6 +62,8 @@ def run_mapreduce_baseline(input_path_or_s3: str, outdir: str | Path) -> dict[st
         {
             "input": input_path_or_s3,
             "rows": row_count,
+            "runtime_seconds": round(perf_counter() - started, 6),
+            "execution_environment": "local Python process",
             "outputs": [str(requests_csv), str(errors_csv), str(top10_csv)],
         }
     )
